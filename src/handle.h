@@ -9,24 +9,27 @@ void kissat_reset_signal_handler (void);
 void kissat_init_alarm (void (*handler) (void));
 void kissat_reset_alarm (void);
 
-#define SIGNALS \
-  SIGNAL (SIGABRT) \
-  SIGNAL (SIGBUS) \
-  SIGNAL (SIGINT) \
-  SIGNAL (SIGSEGV) \
-  SIGNAL (SIGTERM)
+///
+#define SIGNALS
+///
+//#define SIGNALS \
+//  SIGNAL (SIGABRT) \
+//  SIGNAL (SIGBUS) \
+//  SIGNAL (SIGINT) \
+//  SIGNAL (SIGSEGV) \
+//  SIGNAL (SIGTERM)
 
 // clang-format off
 
 static inline const char *
 kissat_signal_name (int sig)
 {
-#define SIGNAL(SIG) \
-  if (sig == SIG) return #SIG;
-  SIGNALS
-#undef SIGNAL
-  if (sig == SIGALRM)
-    return "SIGALRM";
+//#define SIGNAL(SIG) \
+//  if (sig == SIG) return #SIG;
+//  SIGNALS
+//#undef SIGNAL
+//  if (sig == SIGALRM)
+//    return "SIGALRM";
   return "SIGUNKNOWN";
 }
 
