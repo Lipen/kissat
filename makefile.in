@@ -5,7 +5,7 @@ AR=@AR@
 VPATH=../src:../test
 
 %.o: %.c ../[st]*/*.h makefile
-	$(CC) -c $<
+	$(CC) -mno-ms-bitfields -c $<
 
 APPSRC=application.c handle.c parse.c witness.c
 
