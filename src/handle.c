@@ -18,36 +18,36 @@ SIGNALS
 void
 kissat_reset_signal_handler (void)
 {
-  if (!handler_set)
-    return;
-#define SIGNAL(SIG) \
-  signal (SIG, SIG ## _handler);
-  SIGNALS
-#undef SIGNAL
-  handler_set = false;
-  handler = 0;
+//  if (!handler_set)
+//    return;
+//#define SIGNAL(SIG) \
+//  signal (SIG, SIG ## _handler);
+//  SIGNALS
+//#undef SIGNAL
+//  handler_set = false;
+//  handler = 0;
 }
 
 // clang-format on
 
 static void catch_signal (int sig) {
-  if (caught_signal)
-    return;
-  caught_signal = sig;
-  assert (handler_set);
-  assert (handler);
-  handler (sig);
-  kissat_reset_signal_handler ();
-  raise (sig);
+//  if (caught_signal)
+//    return;
+//  caught_signal = sig;
+//  assert (handler_set);
+//  assert (handler);
+//  handler (sig);
+//  kissat_reset_signal_handler ();
+//  raise (sig);
 }
 
 void kissat_init_signal_handler (void (*h) (int sig)) {
-  assert (!handler);
-  handler = h;
-  handler_set = true;
-#define SIGNAL(SIG) SIG##_handler = signal (SIG, catch_signal);
-  SIGNALS
-#undef SIGNAL
+//  assert (!handler);
+//  handler = h;
+//  handler_set = true;
+//#define SIGNAL(SIG) SIG##_handler = signal (SIG, catch_signal);
+//  SIGNALS
+//#undef SIGNAL
 }
 
 static volatile bool caught_alarm;
@@ -56,31 +56,31 @@ static void (*volatile SIGALRM_handler) (int);
 static void (*volatile handle_alarm) (void);
 
 static void catch_alarm (int sig) {
-  assert (sig == SIGALRM);
-  if (caught_alarm)
-    return;
-  caught_alarm = true;
-  static void (*volatile handler) (void);
-  handler = handle_alarm;
-  if (!alarm_handler_set)
-    raise (sig);
-  assert (handler);
-  handler ();
+//  assert (sig == SIGALRM);
+//  if (caught_alarm)
+//    return;
+//  caught_alarm = true;
+//  static void (*volatile handler) (void);
+//  handler = handle_alarm;
+//  if (!alarm_handler_set)
+//    raise (sig);
+//  assert (handler);
+//  handler ();
 }
 
 void kissat_init_alarm (void (*handler) (void)) {
-  assert (handler);
-  assert (!caught_alarm);
-  handle_alarm = handler;
-  alarm_handler_set = true;
-  assert (!SIGALRM_handler);
-  SIGALRM_handler = signal (SIGALRM, catch_alarm);
+//  assert (handler);
+//  assert (!caught_alarm);
+//  handle_alarm = handler;
+//  alarm_handler_set = true;
+//  assert (!SIGALRM_handler);
+//  SIGALRM_handler = signal (SIGALRM, catch_alarm);
 }
 
 void kissat_reset_alarm (void) {
-  assert (alarm_handler_set);
-  assert (handle_alarm);
-  alarm_handler_set = false;
-  handle_alarm = 0;
-  (void) signal (SIGALRM, SIGALRM_handler);
+//  assert (alarm_handler_set);
+//  assert (handle_alarm);
+//  alarm_handler_set = false;
+//  handle_alarm = 0;
+//  (void) signal (SIGALRM, SIGALRM_handler);
 }
